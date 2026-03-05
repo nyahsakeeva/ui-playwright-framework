@@ -6,14 +6,13 @@ module.exports = defineConfig({
 
   timeout: 60000,
 
-  reporter: [
-    ['list'],
-    ['html', { open: 'never' }]
-    
-  ],
+reporter: [
+  ['list'],
+  ['html', { open: 'never' }]
+],
 
   use: {
-    baseURL: 'https://demo.realworld.io',
+    baseURL: 'https://the-internet.herokuapp.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure'
@@ -25,9 +24,9 @@ module.exports = defineConfig({
       use: { ...devices['Desktop Chrome'] }
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }
-    }
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] }
+    // }
   ]
 });
