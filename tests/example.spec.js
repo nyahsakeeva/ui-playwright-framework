@@ -1,6 +1,6 @@
-import { test, expect } from "@playwright/test";
+const { test, expect } = require('@playwright/test');
 
-test("home page has correct title", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-  await expect(page).toHaveTitle(/Playwright/);
+test('has title', async ({ page }) => {
+  await page.goto('https://demo.realworld.io');
+  await expect(page).toHaveTitle(/Conduit/);
 });
