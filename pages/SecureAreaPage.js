@@ -5,7 +5,7 @@ class SecureAreaPage extends BasePage {
   constructor(page) {
     super(page);
 
-    this.heading = page.getByRole("heading", { name: "Secure Area" });
+    this.heading = page.getByRole("heading", { name: "Secure Area", level: 2 });
     this.logoutBtn = page.getByRole("link", { name: "Logout" });
     this.flash = page.locator("#flash");
   }

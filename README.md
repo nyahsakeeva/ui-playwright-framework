@@ -2,104 +2,64 @@
 
 ## Overview
 
-This project is an **end-to-end UI automation framework built with Playwright and JavaScript**.
-It demonstrates modern test automation practices including:
+This repository contains an end-to-end UI automation framework built with **Playwright and JavaScript (Node.js)**.
+The project demonstrates modern automation practices including:
 
 * Page Object Model (POM)
 * Cross-browser testing
-* GitHub Actions CI integration
-* HTML test reporting
-* File uploads, dynamic waits, forms, and UI interactions
+* GitHub Actions continuous integration
+* HTML reporting
+* Playwright Agents for AI-assisted test development
 
-The tests are written against the public demo application:
+The tests target the public demo application used for automation practice:
 
 https://the-internet.herokuapp.com/
 
-This site is widely used for practicing and demonstrating automation testing scenarios.
+This application contains multiple UI components commonly used in automation testing, such as authentication, dropdowns, dynamic content, and file uploads.
 
 ---
 
-# Tech Stack
+# Technology Stack
 
 **Language**
-
-* JavaScript (Node.js)
+JavaScript (Node.js)
 
 **Automation Framework**
-
-* Playwright
+Playwright
 
 **Test Runner**
+Playwright Test
 
-* Playwright Test
-
-**CI/CD**
-
-* GitHub Actions
+**Continuous Integration**
+GitHub Actions
 
 **Reporting**
+Playwright HTML Reporter
 
-* Playwright HTML Reporter
 
----
+# Page Object Model
 
-# Project Structure
+This framework follows the **Page Object Model (POM)** design pattern.
 
-```
-.
-├── pages/
-│   ├── BasePage.js
-│   ├── HomePage.js
-│   ├── LoginPage.js
-│   ├── SecureAreaPage.js
-│   ├── CheckboxesPage.js
-│   ├── DropdownPage.js
-│   ├── DynamicLoadingPage.js
-│   ├── DynamicExample2Page.js
-│   └── FileUploadPage.js
-│
-├── tests/
-│   ├── login.spec.js
-│   ├── checkboxes.spec.js
-│   ├── dropdown.spec.js
-│   ├── dynamicLoading.spec.js
-│   └── fileUpload.spec.js
-│
-├── fixtures/
-│   └── sample.txt
-│
-├── playwright.config.js
-├── package.json
-└── README.md
-```
+Each page of the application is represented by a class in the `pages` directory.
 
----
+### Page Classes
 
-# Page Object Model (POM)
+Contain:
 
-This framework follows the **Page Object Model design pattern**.
+* element locators
+* reusable UI actions
+* page specific logic
 
-Each page of the application is represented by a class inside the `pages/` directory.
+### Test Files
 
-Responsibilities:
+Contain:
 
-**Page Classes**
+* test scenarios
+* assertions
+* calls to page methods
 
-* store locators
-* implement reusable UI actions
-* encapsulate page behavior
-
-**Test Files**
-
-* contain test logic
-* call page methods
-* perform assertions
-
-This separation improves:
-
-* maintainability
-* readability
-* scalability
+This separation improves readability, maintainability, and scalability.
 
 ---
 
@@ -107,127 +67,141 @@ This separation improves:
 
 Clone the repository:
 
-```
-git clone https://github.com/YOUR_USERNAME/playwright-automation.git
-cd playwright-automation
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+cd YOUR_REPOSITORY
 ```
 
 Install dependencies:
 
-```
+```bash
 npm install
 ```
 
 Install Playwright browsers:
 
-```
+```bash
 npx playwright install chromium firefox
 ```
+
+Note: WebKit may not be supported on certain macOS versions.
 
 ---
 
 # Running Tests
 
-Run all tests:
+Run the full test suite:
 
-```
+```bash
 npx playwright test
 ```
 
-Run tests in headed mode (see browser):
+Run tests with a visible browser:
 
-```
+```bash
 npx playwright test --headed
 ```
 
-Run with slow motion (for debugging):
+Run tests slowly for debugging:
 
-```
+```bash
 npx playwright test --headed --slow-mo=500
 ```
 
 Run a specific test file:
 
-```
+```bash
 npx playwright test tests/login.spec.js
+```
+
+Run tests sequentially:
+
+```bash
+npx playwright test --workers=1
+```
+
+Run tests using the interactive UI runner:
+
+```bash
+npx playwright test --ui
 ```
 
 ---
 
 # Test Report
 
-After tests run, generate and open the HTML report:
+After test execution, open the HTML report:
 
-```
+```bash
 npx playwright show-report
 ```
 
-The report includes:
+The report contains:
 
-* test results
+* test execution results
 * screenshots
 * traces
-* videos (for failed tests)
+* videos for failed tests
 
 ---
 
 # Continuous Integration
 
-This project uses **GitHub Actions** to run automated tests on every push.
+This repository includes a **GitHub Actions workflow** that automatically runs the test suite.
 
-Workflow file:
+The workflow is triggered by:
+
+* pushes to the `main` branch
+* pull requests targeting the `main` branch
+* manual execution from the GitHub Actions interface
+
+Workflow file location:
 
 ```
 .github/workflows/playwright.yml
 ```
 
-Pipeline steps:
+The pipeline performs the following steps:
 
-1. Checkout repository
+1. Checkout the repository
 2. Install Node dependencies
 3. Install Playwright browsers
-4. Execute test suite
-5. Upload HTML test report and artifacts
+4. Execute the automated tests
+5. Upload test artifacts
 
-Artifacts include:
-
-* HTML test report
-* screenshots
-* videos
-* traces
+Artifacts include the HTML report, screenshots, traces, and videos.
 
 ---
 
-# Example Test Scenarios
+# Playwright Agents
 
-The test suite covers multiple UI scenarios including:
+Playwright Agents provide AI-assisted tools for creating and maintaining automated tests.
 
-* Login authentication
-* Checkbox interactions
-* Dropdown selection
-* Dynamic content loading
-* File upload functionality
+The agent system includes three components.
 
----
+### Planner
 
-# Useful Commands
+Creates a structured automation test plan written in Markdown.
 
-Run tests with UI runner:
+### Generator
 
-```
-npx playwright test --ui
-```
+Generates Playwright test scripts based on the plan.
 
-Run tests in one browser:
+### Healer
 
-```
-npx playwright test --project=chromium
+Analyzes failing tests and suggests fixes for unstable locators or synchronization issues.
+
+To initialize agents in this repository:
+
+```bash
+npx playwright init-agents --loop=vscode
 ```
 
-Run tests sequentially:
+Typical workflow:
 
-```
-npx playwright test --workers=1
-```
+1. Create a test plan in the `specs` directory
+2. Generate Playwright tests in the `tests` directory
+3. Execute the test suite
+4. Use the healer agent to stabilize failing tests
 
 
